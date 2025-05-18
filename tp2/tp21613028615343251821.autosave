@@ -1,0 +1,49 @@
+float presentación;
+int duración = 400; //10 seg aprox
+int dir = 1;
+PFont fuente;
+float themist;
+PImage portada;
+String texto0;
+String texto1;
+String texto2;
+
+void setup() {
+size(640,480);
+//fuentes de texto
+fuente=loadFont("BookmanOldStyle-Bold-48.vlw");
+fuente2=loadFont("BaskOld.vlw");
+
+//presentaciónes
+presentación = 0;
+presentación2 = 0;
+
+
+
+//textos
+texto0 = "La Niebla \n es una historia que se remonta en la \n región norte de Inglaterra \n , en un pueblo llame Bridgton \n en Main en esto se \n nos presenta a David junto a su \n esposa e hijo, David en su casa tiene \n un especie de vision en la cual \n ve como a causa de una tormenta \n las ventanas de su casa explotaban \n y su familia salía herida \n , tras esa vision David junto\n  a su familia durmieron en el sótano \n por seguridad. ";
+texto1 = "
+}
+
+void draw(){
+   background(0);
+   fill(255);
+   
+   textFont(fuente);
+   if(duración>0){
+     duración--;
+   portada=loadImage("themist.jpg");
+   image(portada,0,0,themist,480);
+   themist+=3;
+   if(themist>=300){
+     themist=300;
+     
+   textSize(17);
+   text(texto0,302,presentación);
+   presentación+=2;
+   if(presentación>=50){
+     presentación=50;
+   }
+  }
+   }
+}
