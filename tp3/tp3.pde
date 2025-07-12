@@ -1,20 +1,7 @@
-
-
 //TP3 comisión 5
 //Rodrigo Ezequiel Rodriguez - legajo 122865/2
 
-int estado = 0;
-
-float vibX1 = 0;
-float vibY1 = 0;
-float vibX2 = 0;
-float vibY2 = 0;
-float vibX3 = 0;
-float vibY3 = 0;
-float vibX4 = 0;
-float vibY4 = 0; 
-float anguloTriangulo3 = 0; 
-float anguloTriangulo4 = 0;
+int estado = 0; 
 float tamcircle = 70;
 float tamcircle2 = 70;
 float tamcircle3 = 90;
@@ -41,7 +28,8 @@ color CIAN = color(0, 200, 215);
 
 boolean apreto;
 boolean apreto2;
-  
+boolean reinicio;
+
 void setup(){
 size(800,400);
 obra=loadImage("pintura.jpg");
@@ -92,133 +80,38 @@ for(int k=0; k<3 ; k++){
  
    // Figuras
    
-  pushMatrix();
-  if (dist(mouseX, mouseY, 710,73) < 50) {
-    vibX1 = random(-2, 2);
-    vibY1 = random(-2, 2);
-  }else{
-    vibX1 = 0;
-    vibY1 = 0;
-  }
-  translate(710+ vibX1, 73 + vibY1);
-  fill(verde2);
-  triangle(-40, -23 ,40 ,-23 ,0 ,47 );   //triangulo columna 3 fila 1
-  popMatrix();
+ vibracionTriangulo(710,73,50, verde2, -40, -23, 40, -23, 0, 47); //triangulo columna 3 fila 1
   
-  pushMatrix();
-  if(dist(mouseX , mouseY,  710,183) < 50) {   
-    vibX2 = random(-1.5, 1);
-    vibY2 = random(-1.5, 1);
-  }else{
-    vibX2 = 0;
-    vibY2 = 0;
-  }
-  translate(710+ vibX2, 183 + vibY2);
-  fill(verde);
-  triangle(-40, 22, 40, 22, 0, -43); //triangulo columna 3 fila 2
-  popMatrix();
-  
-  
+ vibracionTriangulo(710,183,50,verde,-40,22,40,22,0,-43); //triangulo columna 3 fila 2
   
   
   fill(CIAN);
   rect(685,252,50,50);  //rectangulo columna 3 fila 3
   
   
-  
-  
   fill(VERDE);
   rect(585,79,50,50);  //rectangulo columna 2 fila 1
   
   
-  
-   pushMatrix();
-  float d3 = dist(mouseX, mouseY, 610, 203);
-  
-  if (d3<60){
-    float NewTam3 = map(d3,0 ,100 ,50, 90);
-    if (tamcircle3 > NewTam3 + 1) {
-      tamcircle3 -= 1.5;
-    }else if (tamcircle3 < NewTam3 - 1) {
-      tamcircle3 += 1.5;
-    }
-  } else if(tamcircle3 < 90) {
-      tamcircle3 +=1;
-    }
-    
+  tamcircle3 = tamañoCirculo(610,203,tamcircle3,50,90,60);
   fill(verde1);
-  circle(610,203,tamcircle3);  //circulo columna 2 fila 2
-  popMatrix();
+  circle(610,203,tamcircle3); //circulo columna 2 fila 2
   
   
-  
- pushMatrix();
-  float d2 = dist(mouseX, mouseY, 610, 304);
-  
-  if(d2<60) {
-   float NewTam2 = map(d2, 0, 100, 95, 70);
-   if(tamcircle2 < NewTam2 - 1) {
-     tamcircle2 += 1.5;
-  }else if (tamcircle2 > NewTam2 + 1) {
-    tamcircle2 -=1.5;
-  }
-  }else if(tamcircle2 > 70) {
-      tamcircle2 -=1;
-    }
-    
+  tamcircle2 = tamañoCirculoCrece(610, 304, tamcircle2, 70, 95, 60);
   fill(20,40,40);
-  circle(610,304,tamcircle2);  //circulo columna 2 fila 3
-  popMatrix();
+  circle(610, 304, tamcircle2); //circulo columna 2 fila 3
+  
  
-   pushMatrix(); 
-  float d = dist(mouseX, mouseY, 510, 77);
- 
-  if(d<60) {
-    float NewTam = map(d, 0, 100, 90, 70);
-    if(tamcircle < NewTam - 1) {
-      tamcircle += 1.5;
-  }else if (tamcircle > NewTam + 1) {
-    tamcircle -= 1.5;
-  }
-  }else{
-    if (tamcircle > 70) {
-      tamcircle -=1;
-    }
-  }
+  tamcircle = tamañoCirculoCrece(510, 77, tamcircle, 70, 90, 60);
   fill(azul2);
-  circle(510,77,tamcircle);   //circulo columa 1 fila 1 
-  popMatrix(); 
+  circle(510, 77, tamcircle); //circulo columna 1 fila 1 
   
   
-  
-   pushMatrix();
-  if (dist(mouseX, mouseY, 510, 172) < 50) {
-    vibX3 = random(-1.5, 1.5);
-    vibY3 = random(-1.5, 1.5);
-  }else{
-    vibX3 = 0;
-    vibY3 = 0;
-  }
-  
-  translate(510 + vibX3 , 172 + vibY3);
-  fill(azul);
-  triangle(-38,-22 ,38 ,-22 ,0 ,45 );  //triangulo columna 1 fila 2
-  popMatrix();
+  vibracionTriangulo(510,172,50,azul,-38,-22,38,-22,0,45); //triangulo columna 1 fila 2
   
   
-  
-   pushMatrix();
-  if(dist(mouseX , mouseY, 510, 283) < 50) {
-    vibX4 = random(-1.5, 1.5);
-    vibY4 = random(-1.5, 1.5);
-  }else{
-    vibX4 = 0;
-    vibY4 = 0;
-  }
-  translate(510 + vibX4 , 283 + vibY4);
-  fill(celeste2);
-  triangle(-37, 22, 38, 22, 0, -44); //triangulo columna 1 fila 3
-  popMatrix();
+  vibracionTriangulo(510,283,50,celeste2,-37,22,38,22,0,-44);  //triangulo columna 1 fila 3
  
   if(apreto){
   VERDE=color(120,200,215);
@@ -228,26 +121,30 @@ for(int k=0; k<3 ; k++){
   CELESTE=color(0, 200, 215);
   CIAN=color(120,200,215);
  }
-}
+ if(reinicio){
+   VERDE=color(40,200,100);
+   CELESTE2=color(120,200,215);
+   CELESTE=color(120,200,215);
+   CIAN=color(0, 200, 215);
+ }
+  apreto=false;
+  apreto2=false;
+  reinicio=false;
+ }
+  
+
  
  void mouseClicked() {
 if (mouseX >= 0 && mouseX <= 420 && mouseY >= 0 && mouseY <= 400) {
-  println("reinicio");
     estado = 0;
-    tamcircle = 70;
-    tamcircle2 = 70;
-    tamcircle3 = 90;
-  }
+   reinicio=true;
+ }
+   
 if (mouseX >= 585 && mouseX <= 585 + 50 && mouseY >= 79 && mouseY <= 79 + 50) {
    apreto=true;}
    
 if (mouseX >= 685 && mouseX <= 685 + 50 && mouseY >= 252 && mouseY <= 252 + 50) {
     apreto2=true;}
 }
-    
- 
- 
- //if(apreto){
- //verde=color(20,0,100);
- //}
+
  
